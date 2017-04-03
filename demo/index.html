@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>flxs-tree-grid demo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="../flxs-tree-grid.html">
+    <link rel="import" href="../flxs-tree-grid-column.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+  </head>
+<body unresolved class="fullbleed">
+  <div class="vertical-section-container centered">
+      <h3>Basic flxs-tree-grid demo</h3>
+      <demo-snippet>
+        <template>
+          <iron-ajax auto url="englishmonarchs.json" handle-as="json" last-response="{{ajaxResponse}}" id="xhr"></iron-ajax>
+          <flxs-tree-grid dataprovider="{{ ajaxResponse }}" forcePagerRow="true" enableFilters="true" enableExport="true"
+                                        style="width:600px;height:250px;" itemClick="[[this.itemClick]]">
+            <flxs-tree-grid-column type="checkbox"></flxs-tree-grid-column>
+            <flxs-tree-grid-column dataField="nm" headerText="ID" filterControl="TextInput" filterOperation="BeginsWith"></flxs-tree-grid-column>
+            <flxs-tree-grid-column dataField="cty" headerText="Country" filterControl="ComboBox" filterComboBoxBuildFromGrid="true"></flxs-tree-grid-column>
+            <flxs-tree-grid-column dataField="hse" headerText="House"></flxs-tree-grid-column>
+            <flxs-tree-grid-column dataField="yrs" headerText="Years"></flxs-tree-grid-column>
+          </flxs-tree-grid>
+                <script>
+          var grid = document.querySelector('flxs-tree-grid');
+          grid.itemClick =  function(evt){
+            alert("Clicked On " + evt.item.id)
+        };
+        </script>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
